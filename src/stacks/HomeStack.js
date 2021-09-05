@@ -1,23 +1,43 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/native-stack'
+import React from "react"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+
+import { CharacterProcider } from "../providers/CharacterProvider"
 
 import Home from "../screens/Home"
-import Character from "../screens/Character"
+import CharacterScreen from "../screens/Character"
 
 export default function HomeStack() {
+  const Stack = createStackNavigator()
 
-    const Stack = createStackNavigator()
-
-    return (
-        <>
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{}} >
-                <Stack.Screen name="Home" component={Home}/>
-                <Stack.Screen name="Character" component={Character}/>
-            </Stack.Navigator>
-        </NavigationContainer>
-        </>
-    )
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="home"
+          component={Home}
+          options={{
+            headerShown: false,
+            gestureEnabled: true,
+            cardStyle: {
+              backgroundColor: "#0002",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="character"
+          // component={Character}
+          options={{
+            headerShown: false,
+          }}
+        >
+          {({ navigation }) => (
+            <CharacterProcider>
+              <CharacterScreen navigation={navigation} />
+            </CharacterProcider>
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }

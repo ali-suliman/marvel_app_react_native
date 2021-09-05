@@ -1,23 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import HomeStack from "./src/stacks/HomeStack"
+import React from "react"
+import { CharactersProvider } from "./src/providers/AllCharactersProvider"
+import { StyleSheet, View } from "react-native"
 
 import "react-native-gesture-handler"
 
+import HomeStack from "./src/stacks/HomeStack"
+
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <HomeStack />
-    </SafeAreaView>
-  );
+    <CharactersProvider>
+      <View style={styles.container}>
+        <HomeStack />
+      </View>
+    </CharactersProvider>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // paddingHorizontal: 40,
   },
-});
+})
